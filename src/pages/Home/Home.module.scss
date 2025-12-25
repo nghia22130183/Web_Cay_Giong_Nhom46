@@ -1,0 +1,65 @@
+@import '../../styles/variables';
+
+.homeWrapper {
+  background-color: white;
+  min-height: 100vh;
+  position: relative;
+}
+
+.hero {
+  height: 500px;
+  background-color: #e0e0e0; // Tạm thời để màu xám, bạn thay url ảnh vào đây
+  @include flex-center;
+  flex-direction: column;
+  color: $primary-green;
+
+  h1 { font-size: 3rem; margin-bottom: 10px; }
+  button {
+    padding: 15px 40px;
+    background: $primary-green;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    &:hover { background: lighten($primary-green, 10%); }
+  }
+}
+
+.products {
+  padding: 40px 10%;
+  text-align: center;
+  h2 { color: $primary-green; margin-bottom: 30px; }
+
+  .grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 200px;
+    .imagePlaceholder { height: 150px; background: #eee; margin-bottom: 10px; }
+    h3 { font-size: 16px; color: $primary-green; }
+    p { color: red; font-weight: bold; }
+  }
+}
+
+.scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: $primary-green;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-size: 20px;
+  z-index: 100;
+
+  &:hover { transform: translateY(-3px); transition: 0.3s; }
+}

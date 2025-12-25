@@ -1,0 +1,10 @@
+$primary-green: #22745e;
+$primary-beige: #f5f5dc;
+$text-white: #ffffff;
+$accent-gold: #d4af37;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

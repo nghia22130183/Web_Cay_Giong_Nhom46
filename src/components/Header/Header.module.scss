@@ -1,0 +1,84 @@
+@import '../../styles/variables'; // Import đúng đường dẫn từ cấu trúc project
+
+.container {
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.topBar {
+  background-color: $primary-beige; // Màu nền be nhạt
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: $primary-green;
+    span { color: $accent-gold; }
+  }
+
+  .searchBox {
+    display: flex;
+    width: 40%;
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $primary-green;
+      outline: none;
+    }
+    button {
+      background: $primary-green;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 20px;
+    color: $primary-green;
+    font-weight: 600;
+    .item { @include flex-center; gap: 8px; cursor: pointer; }
+  }
+}
+
+.navBar {
+  background-color: $primary-green; // Nền xanh đậm
+  padding: 10px 0;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap; // Tự động xuống dòng nếu danh mục quá dài
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li a {
+      color: $text-white;
+      text-decoration: none;
+      padding: 10px 15px;
+      font-size: 13px; // Chữ nhỏ lại để vừa navbar
+      font-weight: bold;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &:hover { color: $accent-gold; }
+    }
+  }
+}
+
+.carouselText {
+  background: darken($primary-beige, 10%);
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: $primary-green;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+}
