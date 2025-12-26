@@ -5,7 +5,7 @@
   font-family: sans-serif;
 }
 
-// --- TOP BAR ---
+// --- TOP BAR (Giữ nguyên style cũ) ---
 .topBar {
   background-color: $primary-beige;
   padding: 15px 50px;
@@ -28,6 +28,7 @@
       padding: 10px;
       border: 1px solid $primary-green;
       outline: none;
+      // Style cũ của bạn (nền trắng mặc định)
     }
     button {
       background: $primary-green;
@@ -45,17 +46,41 @@
     gap: 20px;
     color: $primary-green;
     font-weight: 600;
+
     .item {
-      @include flex-center;
+      display: flex;
+      align-items: center;
       gap: 8px;
       cursor: pointer;
       transition: color 0.3s;
       &:hover { color: $accent-lightgreen; }
+
+      // --- BỔ SUNG: Class này để hiện chấm đỏ số lượng (Style cũ chưa có) ---
+      .cartWrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .badge {
+          position: absolute;
+          top: -8px;
+          right: -10px;
+          background-color: #ff4757; // Màu đỏ
+          color: white;
+          font-size: 10px;
+          height: 16px;
+          width: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }
 
-// --- NAVBAR ---
+// --- NAVBAR (Giữ nguyên style cũ) ---
 .navBar {
   background-color: $primary-green;
   padding: 10px 0;
@@ -69,7 +94,7 @@
     margin: 0;
 
     li a {
-      color: $text-white;
+      color: white; // Hoặc $text-white nếu bạn có biến này
       text-decoration: none;
       padding: 10px 15px;
       font-size: 13px;
@@ -82,7 +107,7 @@
   }
 }
 
-// --- CAROUSEL TEXT (ĐÃ SỬA ĐỔI) ---
+// --- CAROUSEL TEXT (Cập nhật logic chạy chữ để khớp với Header.jsx) ---
 .carouselText {
   background: darken($primary-beige, 10%);
   color: $primary-green;
@@ -90,23 +115,20 @@
   font-weight: bold;
   text-transform: uppercase;
   border-bottom: 1px solid #ddd;
-
-  // Khung chứa cố định
   padding: 8px 0;
   overflow: hidden;
   position: relative;
   width: 100%;
 
-  // Nội dung chạy bên trong
+  // Cấu trúc mới: .runningContent thay vì thẻ p
   .runningContent {
     display: inline-block;
     white-space: nowrap;
-    padding-left: 100%; // Bắt đầu chạy từ mép phải màn hình
+    padding-left: 100%;
     will-change: transform;
-    animation: scroll-text 25s linear infinite; // Tăng lên 25s cho chậm rãi dễ đọc hơn
+    animation: scroll-text 25s linear infinite;
 
-    // Tác động vào từng cụm chữ riêng lẻ
-    span {
+    .msgItem {
       display: inline-block;
       margin-right: 150px;
       position: relative;
@@ -114,7 +136,7 @@
       &:not(:last-child):after {
         content: "-";
         position: absolute;
-        right: -90px; // Căn chỉnh dấu chấm vào giữa khoảng trống
+        right: -90px;
         color: $primary-green;
         font-size: 1.5em;
         top: -3px;
@@ -123,8 +145,15 @@
   }
 }
 
-// Định nghĩa chuyển động
 @keyframes scroll-text {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    gap: 15px;
+    .searchBox, .actions { width: 100%; justify-content: space-between; }
+  }
 }

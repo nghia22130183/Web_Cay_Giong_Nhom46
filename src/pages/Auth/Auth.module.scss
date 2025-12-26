@@ -1,0 +1,55 @@
+@import '../../styles/variables';
+
+.container { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
+
+.imageSide {
+  flex: 1;
+  // Dùng ảnh nền chất lượng cao
+  background: url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80') center/cover;
+  position: relative;
+  @media(max-width: 768px) { display: none; } // Ẩn ảnh trên mobile
+
+  .overlay {
+    position: absolute; inset: 0;
+    background: rgba(27, 77, 62, 0.7); // Phủ lớp màu xanh tối
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    color: white;
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      span { color: $accent-lightgreen; }
+    }
+  }
+}
+
+.formSide {
+  flex: 1; display: flex; align-items: center; justify-content: center; background: white;
+
+  .formContent {
+    width: 400px; text-align: center;
+    h2 { color: $primary-green; font-size: 2rem; margin-bottom: 10px; font-weight: bold; }
+
+    form {
+      display: flex; flex-direction: column; gap: 15px; margin-top: 30px;
+
+      input {
+        padding: 15px; border: 1px solid #ddd; border-radius: 8px; outline: none;
+        &:focus { border-color: $primary-green; }
+      }
+
+      button {
+        padding: 15px; background: $primary-green; color: white; border: none;
+        border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        &:hover { opacity: 0.9; }
+      }
+    }
+
+    .switch {
+      margin-top: 20px; color: #666;
+      span { color: $primary-green; font-weight: bold; cursor: pointer; }
+    }
+
+    .backHome { display: block; margin-top: 20px; color: #999; font-size: 0.9rem; text-decoration: none; }
+  }
+}

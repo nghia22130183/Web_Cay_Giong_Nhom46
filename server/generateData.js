@@ -1,21 +1,42 @@
-const fs = require('fs');
-const { faker } = require('@faker-js/faker');
+import fs from 'fs';
+
+const categories = [
+    "CÂY ĂN TRÁI", "CÂY BONSAI", "CÂY CẢNH", "CÂY CÓ HOA",
+    "CÂY ĐỘC LẠ", "CÂY GIA VỊ", "CÂY GIỐNG", "CÂY HOA LEO",
+    "CÂY LỚN", "HOA LAN", "PHÂN BÓN - VẬT TƯ"
+];
+
+const names = {
+    "CÂY ĂN TRÁI": ["Xoài", "Mít", "Sầu Riêng", "Vú Sữa", "Bưởi", "Ổi", "Nhãn", "Chôm Chôm", "Măng Cụt"],
+    "CÂY BONSAI": ["Tùng La Hán", "Mai Chiếu Thủy", "Linh Sam", "Nguyệt Quế", "Sanh", "Đa Búp Đỏ"],
+    "HOA LAN": ["Phi Điệp", "Dendro", "Hồ Điệp", "Mokara", "Vũ Nữ", "Ngọc Điểm"],
+    "DEFAULT": ["Kim Tiền", "Lưỡi Hổ", "Trầu Bà", "Sen Đá", "Xương Rồng", "Phát Tài", "Vạn Lộc"]
+};
+
+const suffixes = ["Thái Lan", "Cổ Thụ", "Gốc VIP", "F1", "Siêu Trái", "Mini", "Để Bàn", "Đột Biến"];
+
+const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const createPlant = (id) => {
+    const category = getRandom(categories);
+    const baseName = getRandom(names[category] || names["DEFAULT"]);
+    const suffix = getRandom(suffixes);
+
+    const price = randomInt(5, 500) * 10000;
+    const isSale = Math.random() > 0.7;
+
     return {
         id: id,
-        name: faker.commerce.productName(), // Tên cây
-        category: faker.helpers.arrayElement(['Indoor', 'Outdoor', 'Bonsai', 'Succulent']),
-        price: parseInt(faker.commerce.price({ min: 100000, max: 5000000, dec: 0 })),
-        originalPrice: parseInt(faker.commerce.price({ min: 5000000, max: 8000000, dec: 0 })),
-        description: faker.commerce.productDescription(),
-        images: [
-            faker.image.urlLoremFlickr({ category: 'nature' }),
-            faker.image.urlLoremFlickr({ category: 'plants' }),
-            faker.image.urlLoremFlickr({ category: 'flowers' })
-        ],
-        stock: faker.number.int({ min: 0, max: 100 }),
-        rating: faker.number.float({ min: 3, max: 5, precision: 0.1 })
+        name: `${baseName} ${suffix} #${id}`,
+        category: category,
+        price: price,
+        oldPrice: isSale ? price + randomInt(2, 10) * 10000 : null,
+        description: `Sản phẩm ${baseName} chất lượng cao, phù hợp khí hậu Việt Nam. Cây khỏe, bầu rễ ổn định.`,
+        image: `https://picsum.photos/seed/${id}/400/400`,
+        stock: randomInt(0, 100),
+        rating: randomInt(3, 5),
+        reviews: randomInt(5, 200)
     };
 };
 
@@ -27,8 +48,9 @@ for (let i = 1; i <= 500; i++) {
 const db = {
     products: plantList,
     cart: [],
+    users: [],
     orders: []
 };
 
 fs.writeFileSync('./server/db.json', JSON.stringify(db, null, 2));
-console.log("Đã tạo 500 cây cảnh vào server/db.json thành công!");
+console.log("✅ Đã tạo 500 cây cảnh chuẩn Việt Nam vào server/db.json!");
