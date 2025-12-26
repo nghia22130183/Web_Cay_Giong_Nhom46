@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchProducts } from '../../redux/productSlice';
+// Đã xóa import addToCart vì Home không dùng trực tiếp nữa
+
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { FaArrowUp, FaTruck, FaLeaf, FaHeadset, FaStar, FaBookOpen } from 'react-icons/fa'; // Thêm icon FaBookOpen
+// Import Component mới
+import ProductCard from '../../components/ProductCard/ProductCard';
+
+import { FaArrowUp, FaTruck, FaLeaf, FaHeadset, FaBookOpen } from 'react-icons/fa';
 import styles from './Home.module.scss';
 
 const Home = () => {
+    const dispatch = useAppDispatch();
+    const { items: products, status } = useAppSelector(state => state.products);
+
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchProducts());
+        }
+    }, [status, dispatch]);
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -15,13 +31,11 @@ const Home = () => {
         { name: "Hoa Lan Quý", img: "https://nongnghiepdep.com/wp-content/uploads/2023/06/lan-hac-dinh-1.jpg" }
     ];
 
-    const products = [1, 2, 3, 4, 5, 6, 7, 8];
-
     return (
         <div className={styles.homeWrapper}>
             <Header />
 
-            {/* 1. HERO SECTION */}
+            {/* HERO SECTION */}
             <section className={styles.hero}>
                 <div className={styles.overlay}></div>
                 <div className={styles.heroContent}>
@@ -35,7 +49,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 2. FEATURES */}
+            {/* FEATURES */}
             <section className={styles.features}>
                 <div className={styles.featureItem}>
                     <div className={styles.iconBox}><FaTruck /></div>
@@ -54,7 +68,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 3. CATEGORIES */}
+            {/* CATEGORIES */}
             <section className={styles.categories}>
                 <h2 className={styles.sectionTitle}>DANH MỤC PHỔ BIẾN</h2>
                 <div className={styles.cateGrid}>
@@ -69,34 +83,19 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 4. BEST SELLERS */}
+            {/* PRODUCTS SECTION */}
             <section className={styles.products}>
                 <h2 className={styles.sectionTitle}>SẢN PHẨM BÁN CHẠY</h2>
+
                 <div className={styles.grid}>
-                    {products.map(i => (
-                        <div key={i} className={styles.card}>
-                            <div className={styles.badge}>-20%</div>
-                            <div className={styles.imagePlaceholder}>
-                                <img src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn5RMRuvFko6t5ngFif02P6ChjU51H2KeeCQ&s,${i}`} alt="Plant" onError={(e) => e.target.src='https://via.placeholder.com/300'}/>
-                            </div>
-                            <div className={styles.cardInfo}>
-                                <span className={styles.cateName}>Cây Ăn Trái</span>
-                                <h3>Mít Thái Siêu Sớm</h3>
-                                <div className={styles.priceRow}>
-                                    <span className={styles.price}>45.000đ</span>
-                                    <span className={styles.oldPrice}>60.000đ</span>
-                                </div>
-                                <div className={styles.rating}>
-                                    <FaStar/><FaStar/><FaStar/><FaStar/><FaStar/> <span>(12)</span>
-                                </div>
-                            </div>
-                            <button className={styles.addBtn}>Thêm vào giỏ</button>
-                        </div>
+                    {/* Sử dụng Component ProductCard mới */}
+                    {products && products.slice(0, 8).map((product) => (
+                        <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
             </section>
 
-            {/* 5. ADVICE & GUIDE (MỚI THÊM) */}
+            {/* ADVICE & GUIDE */}
             <section className={styles.adviceSection}>
                 <div className={styles.adviceContent}>
                     <div className={styles.iconWrapper}>
