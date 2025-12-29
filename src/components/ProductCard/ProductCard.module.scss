@@ -90,4 +90,31 @@ $font-heading: 'Montserrat', sans-serif;
 
     &:hover { background: darken($primary-green, 10%); }
   }
+  .priceRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+
+    .price {
+      color: #e74c3c;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .oldPrice {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 0.9rem;
+    }
+  }
+
+  .card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+  }
 }
