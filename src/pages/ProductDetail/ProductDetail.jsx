@@ -13,18 +13,14 @@ const ProductDetail = () => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
 
-    // States
     const [quantity, setQuantity] = useState(1);
     const [selectedImg, setSelectedImg] = useState("");
 
     const { items: products, status } = useAppSelector(state => state.products);
-
-    // 1. Tối ưu tìm kiếm sản phẩm bằng useMemo
     const product = useMemo(() => {
         return products.find(p => p.id === parseInt(id));
     }, [products, id]);
 
-    // 2. Tối ưu lấy sản phẩm liên quan
     const relatedProducts = useMemo(() => {
         if (!product) return [];
         return products
@@ -37,12 +33,10 @@ const ProductDetail = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [id, status, dispatch]);
 
-    // 3. Cập nhật ảnh mặc định khi đổi sản phẩm
     useEffect(() => {
         if (product) {
-            // Ưu tiên lấy ảnh đầu tiên trong mảng images, nếu không có lấy image đơn
             setSelectedImg(product.images?.[0] || product.image);
-            setQuantity(1); // Reset số lượng về 1 khi đổi sản phẩm
+            setQuantity(1);
         }
     }, [product]);
 
@@ -61,7 +55,6 @@ const ProductDetail = () => {
 
     const handleAddToCart = () => {
         dispatch(addToCart({ ...product, quantity }));
-        // Thay alert bằng Toast hoặc Notification sẽ chuyên nghiệp hơn
     };
 
     return (
@@ -69,7 +62,6 @@ const ProductDetail = () => {
             <Header />
 
             <main className={styles.container}>
-                {/* Breadcrumb đơn giản */}
                 <nav className={styles.breadcrumb}>
                     <Link to="/">Trang chủ</Link> <FaChevronRight />
                     <span>{product.category}</span> <FaChevronRight />
@@ -77,14 +69,12 @@ const ProductDetail = () => {
                 </nav>
 
                 <div className={styles.productMain}>
-                    {/* GALLERY ẢNH NHIỀU GÓC MẶT */}
                     <div className={styles.imageSection}>
                         <div className={styles.mainImage}>
                             <img src={selectedImg} alt={product.name} />
                             {product.oldPrice && <div className={styles.saleBadge}>Sale</div>}
                         </div>
 
-                        {/* Hiển thị list ảnh nhỏ nếu có mảng images trong db.json */}
                         {product.images && product.images.length > 1 && (
                             <div className={styles.thumbList}>
                                 {product.images.map((img, index) => (
@@ -99,8 +89,6 @@ const ProductDetail = () => {
                             </div>
                         )}
                     </div>
-
-                    {/* THÔNG TIN SẢN PHẨM */}
                     <div className={styles.productContent}>
                         <span className={styles.categoryName}>{product.category}</span>
                         <h1>{product.name}</h1>
@@ -143,7 +131,6 @@ const ProductDetail = () => {
                     </div>
                 </div>
 
-                {/* SẢN PHẨM LIÊN QUAN */}
                 {relatedProducts.length > 0 && (
                     <section className={styles.relatedSection}>
                         <h2 className={styles.sectionTitle}>Sản phẩm tương tự</h2>

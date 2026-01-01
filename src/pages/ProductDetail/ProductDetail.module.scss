@@ -1,14 +1,11 @@
-// 1. IMPORT & VARIABLES
 @import '../../styles/variables';
 
-// Đảm bảo các biến cốt lõi luôn có giá trị để tránh lỗi biên dịch
 $white: #ffffff !default;
 $primary-green: #27ae60 !default;
 $bg-light: #f8f9fa;
 $text-dark: #1a1a1a;
 $text-gray: #6c757d;
 
-// 2. MIXINS (Gom nhóm các thuộc tính hay dùng)
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -19,7 +16,6 @@ $text-gray: #6c757d;
   transition: all 0.3s ease-in-out;
 }
 
-// 3. MAIN STYLES
 .wrapper {
   background-color: $bg-light;
   min-height: 100vh;
@@ -50,7 +46,7 @@ $text-gray: #6c757d;
 
 .imageSection {
   position: sticky;
-  top: 100px; // Ảnh đứng yên khi cuộn văn bản bên phải
+  top: 100px;
 
   img {
     width: 100%;
@@ -187,22 +183,6 @@ $text-gray: #6c757d;
         font-size: 20px;
         color: $primary-green;
       }
-    }
-  }
-}
-
-// 4. MOBILE OPTIMIZATION
-@media (max-width: 480px) {
-  .actionBox {
-    flex-direction: column;
-    .quantitySelector {
-      width: 100%;
-      justify-content: center;
-      button { flex: 1; }
-      span { flex: 1; }
-    }
-    .addBtn {
-      padding: 15px;
     }
   }
 }

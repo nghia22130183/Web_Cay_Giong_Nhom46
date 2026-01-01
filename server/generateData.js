@@ -53,4 +53,4 @@ const db = {
 };
 
 fs.writeFileSync('./server/db.json', JSON.stringify(db, null, 2));
-console.log("✅ Đã tạo 500 cây cảnh chuẩn Việt Nam vào server/db.json!");
+console.log("Đã tạo 500 cây cảnh vào server/db.json!");

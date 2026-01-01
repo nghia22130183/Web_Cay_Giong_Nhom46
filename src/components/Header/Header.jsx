@@ -10,10 +10,8 @@ const Header = () => {
     const [user, setUser] = useState(null);
     const [isScrolled, setIsScrolled] = useState(false);
 
-    // Lấy số lượng giỏ hàng từ Redux
     const { totalQuantity } = useAppSelector(state => state.cart) || { totalQuantity: 0 };
 
-    // 1. Kiểm tra đăng nhập & Lắng nghe thay đổi scroll
     useEffect(() => {
         const checkUser = () => {
             const storedUser = localStorage.getItem('user');
@@ -59,14 +57,12 @@ const Header = () => {
 
     return (
         <header className={`${styles.container} ${isScrolled ? styles.sticky : ''}`}>
-            {/* Tầng 1: Thanh thông báo nhỏ phía trên cùng (Top Strip) */}
             <div className={styles.topStrip}>
                 <marquee scrollamount="5">
                     Giao hàng toàn quốc - Bảo hành 1 đổi 1 trong 7 ngày - Hỗ trợ kỹ thuật trọn đời
                 </marquee>
             </div>
 
-            {/* Tầng 2: Main Header */}
             <div className={styles.mainHeader}>
                 <div className={styles.logo} onClick={() => navigate('/')}>
                     FINITI<span>GARDEN</span>
@@ -85,7 +81,6 @@ const Header = () => {
                                 <span>{user.username}</span>
                                 <FaChevronDown size={10} />
                             </div>
-                            {/* Dropdown menu khi đã đăng nhập */}
                             <ul className={styles.userDropdown}>
                                 <li onClick={() => navigate('/profile')}>Tài khoản của tôi</li>
                                 <li onClick={() => navigate('/orders')}>Đơn mua</li>
@@ -110,7 +105,6 @@ const Header = () => {
                 </div>
             </div>
 
-            {/* Tầng 3: Menu danh mục */}
             <nav className={styles.mainNav}>
                 <ul>
                     {categories.map((cat, idx) => (
