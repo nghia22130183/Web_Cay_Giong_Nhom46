@@ -6,6 +6,11 @@ import Cart from '../pages/Cart/Cart';
 import Category from '../pages/Category/Category';
 import Checkout from '../pages/Checkout/Checkout';
 import Auth from '../pages/Auth/Auth';
+import SearchResults from '../pages/SearchResults/SearchResults'; // Kiểm tra lại đường dẫn file của bạn
+import Success from '../pages/Success/Success';
+import Profile from '../pages/Profile/Profile';
+import WishlistPage from '../pages/Wishlist/Wishlist'; // Hoặc đường dẫn thực tế của bạn
+import NotFound from '../pages/NotFound/NotFound';
 
 const AppRouter = () => {
     return (
@@ -17,6 +22,11 @@ const AppRouter = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/search" element={<SearchResults />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 };

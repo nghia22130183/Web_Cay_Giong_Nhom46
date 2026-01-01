@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaSearch, FaShoppingCart, FaUser, FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
+import { FaSearch, FaShoppingCart, FaUser, FaSignOutAlt, FaChevronDown, FaHeart } from 'react-icons/fa'; // Thêm FaHeart
 import { useAppSelector } from '../../redux/hooks';
 import styles from './Header.module.scss';
 
@@ -9,8 +9,11 @@ const Header = () => {
     const location = useLocation();
     const [user, setUser] = useState(null);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [searchTerm, setSearchTerm] = useState(""); // State cho ô tìm kiếm
 
+    // Lấy dữ liệu từ Redux
     const { totalQuantity } = useAppSelector(state => state.cart) || { totalQuantity: 0 };
+    const wishlistItems = useAppSelector(state => state.wishlist.wishlistItems) || []; // Lấy số lượng yêu thích
 
     useEffect(() => {
         const checkUser = () => {
@@ -24,7 +27,6 @@ const Header = () => {
 
         checkUser();
         window.addEventListener('scroll', handleScroll);
-        // Lắng nghe từ Auth.jsx gửi sang
         window.addEventListener('storage', checkUser);
 
         return () => {
@@ -32,6 +34,15 @@ const Header = () => {
             window.removeEventListener('storage', checkUser);
         };
     }, []);
+
+    // Hàm xử lý tìm kiếm
+    const handleSearch = (e) => {
+        if (e.key === 'Enter' || e.type === 'click') {
+            if (searchTerm.trim()) {
+                navigate(`/search?q=${searchTerm}`);
+            }
+        }
+    };
 
     const handleLogout = () => {
         if (window.confirm("Bạn muốn đăng xuất?")) {
@@ -69,11 +80,26 @@ const Header = () => {
                 </div>
 
                 <div className={styles.searchBar}>
-                    <input type="text" placeholder="Tìm kiếm cây giống, phân bón..." />
-                    <button className={styles.searchBtn}><FaSearch /></button>
+                    <input
+                        type="text"
+                        placeholder="Tìm kiếm cây giống, phân bón..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={handleSearch} // Tìm khi nhấn Enter
+                    />
+                    <button className={styles.searchBtn} onClick={handleSearch}><FaSearch /></button>
                 </div>
 
                 <div className={styles.userActions}>
+                    {/* THÊM: Nút Yêu thích (Wishlist) */}
+                    <div className={styles.actionItem} onClick={() => navigate('/wishlist')}>
+                        <div className={styles.cartIcon}>
+                            <FaHeart />
+                            {wishlistItems.length > 0 && <span className={styles.cartBadge}>{wishlistItems.length}</span>}
+                        </div>
+                        <span>Yêu thích</span>
+                    </div>
+
                     {user ? (
                         <div className={styles.accountBox}>
                             <div className={styles.userInfo}>
