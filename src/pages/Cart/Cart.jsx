@@ -1,6 +1,5 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '../../redux/hooks'; // Import hook
-import { addToCart } from '../../redux/cartSlice'; // Nếu muốn thêm logic tăng giảm
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { FaTrash, FaArrowLeft } from 'react-icons/fa';
@@ -25,7 +24,6 @@ const Cart = () => {
                     </div>
                 ) : (
                     <div className={styles.cartContent}>
-                        {/* List sản phẩm */}
                         <div className={styles.items}>
                             {cartItems.map((item, index) => (
                                 <div key={index} className={styles.item}>
@@ -42,7 +40,6 @@ const Cart = () => {
                             ))}
                         </div>
 
-                        {/* Tổng tiền */}
                         <div className={styles.summary}>
                             <h3>Tóm tắt đơn hàng</h3>
                             <div className={styles.row}><span>Tạm tính:</span> <span>{totalAmount.toLocaleString()}đ</span></div>
@@ -65,5 +62,4 @@ const Cart = () => {
     );
 };
 
-// QUAN TRỌNG: Dòng này chính là cái mà AppRouter đang tìm kiếm
 export default Cart;

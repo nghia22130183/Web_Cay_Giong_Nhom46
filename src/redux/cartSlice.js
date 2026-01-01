@@ -15,7 +15,6 @@ const cartSlice = createSlice({
             const existingItem = state.cartItems.find((item) => item.id === newItem.id);
 
             if (!existingItem) {
-                // Nếu sản phẩm chưa có trong giỏ -> Thêm mới
                 state.cartItems.push({
                     id: newItem.id,
                     name: newItem.name,
@@ -25,7 +24,6 @@ const cartSlice = createSlice({
                     totalPrice: newItem.price,
                 });
             } else {
-                // Nếu đã có -> Tăng số lượng
                 existingItem.quantity++;
                 existingItem.totalPrice = existingItem.totalPrice + newItem.price;
             }
@@ -33,7 +31,6 @@ const cartSlice = createSlice({
             state.totalQuantity++;
             state.totalAmount = state.totalAmount + newItem.price;
         },
-        // Sau này bạn có thể thêm: removeFromCart, clearCart ở đây
     },
 });
 
