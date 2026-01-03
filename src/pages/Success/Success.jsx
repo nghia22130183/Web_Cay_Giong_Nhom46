@@ -1,16 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// Nếu chưa cài react-icons, hãy tạm thời comment 3 dòng Fa dưới đây
+import { FaCheckCircle, FaArrowRight, FaHome } from 'react-icons/fa';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import styles from './Sucess.module.scss';
 
-const Success = () => (
-    <div className="text-center py-5">
-        <div className="display-1 text-success">✔</div>
-        <h2>Đặt hàng thành công!</h2>
-        <p>Cảm ơn bạn đã tin tưởng cửa hàng cây cảnh của chúng mình.</p>
-        <div className="mt-4">
-            <Link to="/profile/orders" className="btn btn-primary me-2">Xem đơn hàng</Link>
-            <Link to="/" className="btn btn-outline-secondary">Tiếp tục mua sắm</Link>
+const Success = () => {
+    const navigate = useNavigate();
+
+    return (
+        <div className={styles.successWrapper}>
+            <Header />
+            <div className={styles.container}>
+                <div className={styles.contentCard}>
+                    <div className={styles.iconBox}>
+                        <FaCheckCircle />
+                    </div>
+                    <h2 className={styles.title}>Đặt hàng thành công!</h2>
+                    <p className={styles.message}>
+                        Cảm ơn bạn! Đơn hàng của bạn đã được hệ thống ghi nhận.
+                    </p>
+
+                    <div className={styles.buttonGroup}>
+                        <button
+                            className={styles.viewOrderBtn}
+                            onClick={() => navigate('/profile')}
+                        >
+                            Xem đơn hàng tại Profile <FaArrowRight />
+                        </button>
+
+                        <button
+                            className={styles.homeBtn}
+                            onClick={() => navigate('/')}
+                        >
+                            <FaHome /> Tiếp tục mua sắm
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <Footer />
         </div>
-    </div>
-);
+    );
+};
 
 export default Success;
