@@ -15,7 +15,6 @@ const cartSlice = createSlice({
             const existingItem = state.cartItems.find((item) => item.id === newItem.id);
 
             if (!existingItem) {
-                // Nếu sản phẩm chưa có trong giỏ -> Thêm mới
                 state.cartItems.push({
                     id: newItem.id,
                     name: newItem.name,
@@ -25,17 +24,35 @@ const cartSlice = createSlice({
                     totalPrice: newItem.price,
                 });
             } else {
-                // Nếu đã có -> Tăng số lượng
                 existingItem.quantity++;
-                existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+                existingItem.totalPrice += newItem.price;
             }
 
             state.totalQuantity++;
-            state.totalAmount = state.totalAmount + newItem.price;
+            state.totalAmount += newItem.price;
         },
-        // Sau này bạn có thể thêm: removeFromCart, clearCart ở đây
+
+        // 1. Xóa một sản phẩm hoàn toàn khỏi giỏ
+        removeFromCart: (state, action) => {
+            const id = action.payload;
+            const existingItem = state.cartItems.find(item => item.id === id);
+
+            if (existingItem) {
+                state.totalQuantity -= existingItem.quantity;
+                state.totalAmount -= existingItem.totalPrice;
+                state.cartItems = state.cartItems.filter(item => item.id !== id);
+            }
+        },
+
+        // 2. Xóa sạch giỏ hàng (Để gọi sau khi addOrder thành công)
+        clearCart: (state) => {
+            state.cartItems = [];
+            state.totalQuantity = 0;
+            state.totalAmount = 0;
+        }
     },
 });
 
-export const { addToCart } = cartSlice.actions;
+// QUAN TRỌNG: Bạn phải liệt kê clearCart ở đây để Cart.jsx không bị lỗi import
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
