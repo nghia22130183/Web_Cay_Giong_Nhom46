@@ -11,6 +11,6 @@ export const store = configureStore({
         cart: cartReducer,
         wishlist: wishlistReducer,
         user: userReducer,
-        orders: orderReducer, // 2. Khai báo orders để trang Profile có thể lấy dữ liệu
+        orders: orderReducer,
     },
 });

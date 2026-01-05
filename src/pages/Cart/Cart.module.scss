@@ -1,6 +1,5 @@
 @import '../../styles/variables';
 
-// Biến bổ sung cho màu sắc tinh tế hơn
 $bg-light: #f8f9fa;
 $border-color: #eee;
 $text-muted: #777;
@@ -26,7 +25,7 @@ $text-muted: #777;
   letter-spacing: 1px;
 }
 
-// --- GIỎ HÀNG TRỐNG ---
+//GIỎ HÀNG TRỐNG
 .empty {
   text-align: center;
   padding: 80px 20px;
@@ -48,7 +47,7 @@ $text-muted: #777;
   }
 }
 
-// --- BỐ CỤC CHÍNH ---
+//BỐ CỤC CHÍNH
 .cartContent {
   display: grid;
   grid-template-columns: 1.8fr 1.2fr;
@@ -58,7 +57,7 @@ $text-muted: #777;
   @media(max-width: 992px) { grid-template-columns: 1fr; }
 }
 
-// --- DANH SÁCH SẢN PHẨM ---
+//DANH SÁCH SẢN PHẨM
 .items {
   display: flex;
   flex-direction: column;
@@ -110,7 +109,7 @@ $text-muted: #777;
   }
 }
 
-// --- FORM THÔNG TIN GIAO HÀNG ---
+//FORM THÔNG TIN GIAO HÀNG
 .shippingForm {
   background: white;
   padding: 25px;
@@ -148,7 +147,7 @@ $text-muted: #777;
   textarea { min-height: 100px; resize: none; }
 }
 
-// --- TỔNG KẾT ĐƠN HÀNG ---
+//TỔNG KẾT ĐƠN HÀNG
 .summary {
   background: white;
   padding: 30px;

@@ -1,9 +1,9 @@
 import React from 'react';
-import { FaStar, FaHeart, FaRegHeart } from 'react-icons/fa'; // Thêm icon Heart
+import { FaStar, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'; // Thêm useAppSelector
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addToCart } from '../../redux/cartSlice';
-import { addToWishlist, removeFromWishlist } from '../../redux/wishlistSlice'; // Thêm action wishlist
+import { addToWishlist, removeFromWishlist } from '../../redux/wishlistSlice';
 import styles from './ProductCard.module.scss';
 
 const ProductCard = ({ product }) => {
@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
     };
 
     const handleToggleWishlist = (e) => {
-        e.stopPropagation(); // Ngăn chặn sự kiện click lan ra thẻ card
+        e.stopPropagation();
         if (isFavorite) {
             dispatch(removeFromWishlist(product.id));
         } else {

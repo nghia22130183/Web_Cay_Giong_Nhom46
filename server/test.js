@@ -299,7 +299,6 @@ const realProductTemplates = [
     }
 ];
 
-// 2. Các hậu tố để "nhân bản" sản phẩm
 const variations = [
     "Giống F1", "Cây Cho Trái", "Gốc Cổ Thụ", "Hàng VIP", "Size Lớn", 
     "Chậu Nhựa", "Bầu Rễ Ổn Định", "Cây Công Trình", "Hàng Tuyển Chọn", "Sản Phẩm Đang Hot"
@@ -310,9 +309,7 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + mi
 const plantList = [];
 let idCounter = 1;
 
-// 3. Logic nhân bản: Duyệt qua danh sách gốc và nhân lên
 realProductTemplates.forEach((template) => {
-    // Với mỗi cây gốc, tạo ra 20 biến thể (25 cây gốc x 20 = 500 sản phẩm)
     for (let i = 0; i < 20; i++) {
         const suffix = variations[i % variations.length];
         const price = randomInt(15, 200) * 10000;
@@ -340,4 +337,4 @@ const db = {
 };
 
 fs.writeFileSync('./server/db.json', JSON.stringify(db, null, 2));
-console.log(`Đã tạo thành công ${plantList.length} sản phẩm thực tế!`);
+console.log(`Tạo thành công ${plantList.length} sản phẩm`);

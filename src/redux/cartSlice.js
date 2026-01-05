@@ -32,7 +32,6 @@ const cartSlice = createSlice({
             state.totalAmount += newItem.price;
         },
 
-        // 1. Xóa một sản phẩm hoàn toàn khỏi giỏ
         removeFromCart: (state, action) => {
             const id = action.payload;
             const existingItem = state.cartItems.find(item => item.id === id);
@@ -44,7 +43,6 @@ const cartSlice = createSlice({
             }
         },
 
-        // 2. Xóa sạch giỏ hàng (Để gọi sau khi addOrder thành công)
         clearCart: (state) => {
             state.cartItems = [];
             state.totalQuantity = 0;
@@ -53,6 +51,5 @@ const cartSlice = createSlice({
     },
 });
 
-// QUAN TRỌNG: Bạn phải liệt kê clearCart ở đây để Cart.jsx không bị lỗi import
 export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

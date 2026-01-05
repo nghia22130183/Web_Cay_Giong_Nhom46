@@ -27,7 +27,6 @@ const Cart = () => {
     const handleCheckout = () => {
         if (cartItems.length === 0) return;
 
-        // Kiểm tra validation đơn giản
         if (!customerInfo.name || !customerInfo.phone || !customerInfo.address) {
             alert("Vui lòng điền đầy đủ thông tin giao hàng!");
             return;
@@ -36,7 +35,7 @@ const Cart = () => {
         dispatch(addOrder({
             items: cartItems,
             totalAmount: totalAmount,
-            customerInfo: customerInfo // Truyền thông tin khách vừa nhập vào
+            customerInfo: customerInfo
         }));
 
         navigate('/success');
@@ -56,7 +55,6 @@ const Cart = () => {
                 ) : (
                     <div className={styles.cartContent}>
                         <div className={styles.items}>
-                            {/* Danh sách sản phẩm */}
                             {cartItems.map((item) => (
                                 <div key={item.id} className={styles.item}>
                                     <img src={item.image} alt={item.name} />
@@ -69,7 +67,6 @@ const Cart = () => {
                                 </div>
                             ))}
 
-                            {/* Form thông tin khách hàng */}
                             <div className={styles.shippingForm}>
                                 <h4 className="mt-4 mb-3"><FaUserEdit /> Thông tin giao hàng</h4>
                                 <div className="row">

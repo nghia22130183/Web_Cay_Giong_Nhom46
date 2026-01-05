@@ -46,7 +46,6 @@ const Category = () => {
         <div className={styles.wrapper}>
             <Header />
 
-            {/* Breadcrumb đơn giản */}
             <div className={styles.breadcrumb}>
                 <Link to="/"><FaHome /> Trang chủ</Link>
                 <FaChevronRight className={styles.icon} />

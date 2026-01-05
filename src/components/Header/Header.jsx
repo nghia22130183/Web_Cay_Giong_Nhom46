@@ -35,7 +35,7 @@ const Header = () => {
         };
     }, []);
 
-    // Hàm xử lý tìm kiếm
+    //xử lý tìm kiếm
     const handleSearch = (e) => {
         if (e.key === 'Enter' || e.type === 'click') {
             if (searchTerm.trim()) {
@@ -85,13 +85,12 @@ const Header = () => {
                         placeholder="Tìm kiếm cây giống, phân bón..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        onKeyDown={handleSearch} // Tìm khi nhấn Enter
+                        onKeyDown={handleSearch}
                     />
                     <button className={styles.searchBtn} onClick={handleSearch}><FaSearch /></button>
                 </div>
 
                 <div className={styles.userActions}>
-                    {/* THÊM: Nút Yêu thích (Wishlist) */}
                     <div className={styles.actionItem} onClick={() => navigate('/wishlist')}>
                         <div className={styles.cartIcon}>
                             <FaHeart />

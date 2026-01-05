@@ -9,7 +9,6 @@ import { FaTrash, FaCartPlus, FaEye } from 'react-icons/fa';
 import styles from './Wishlist.module.scss';
 
 const Wishlist = () => {
-    // Đảm bảo wishlistItems luôn là mảng để không bị lỗi .length
     const wishlistItems = useSelector((state) => state.wishlist?.items || []);
     const dispatch = useDispatch();
 
@@ -31,7 +30,6 @@ const Wishlist = () => {
                             <div key={item.id} className={styles.wishlistCard}>
                                 <div className={styles.imageBox}>
                                     <img
-                                        // Kiểm tra nhiều nguồn ảnh và thêm ảnh dự phòng
                                         src={item.image || (item.images && item.images[0]) || 'https://via.placeholder.com/300?text=No+Image'}
                                         alt={item.name}
                                         onError={(e) => {
@@ -48,7 +46,6 @@ const Wishlist = () => {
                                 </div>
                                 <div className={styles.content}>
                                     <h4>{item.name}</h4>
-                                    {/* Thêm check price để tránh lỗi toLocaleString trên undefined */}
                                     <p className={styles.price}>{(item.price || 0).toLocaleString()}đ</p>
                                     <div className={styles.actions}>
                                         <Link to={`/product/${item.id}`} className={styles.btnDetail}>

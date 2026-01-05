@@ -39,7 +39,6 @@ const Auth = () => {
                     <p>Chào mừng bạn quay trở lại!</p>
 
                     <form onSubmit={handleSubmit}>
-                        {/* Nếu là Đăng ký thì mới hiện ô nhập Họ và tên */}
                         {!isLogin && (
                             <input
                                 type="text"

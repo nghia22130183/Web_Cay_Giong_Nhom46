@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import styles from './ReviewForm.module.scss'; // Nhớ tạo cả file scss này nhé
+import styles from './ReviewForm.module.scss'; // Nhớ tạo cả file scss này nha Nghĩa
 
 const ReviewForm = ({ productId, onReviewSubmit }) => {
     const [rating, setRating] = useState(0);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// Nếu chưa cài react-icons, hãy tạm thời comment 3 dòng Fa dưới đây
+//chưa cài react-icons thì thêm tạm comment 3 dòng Fa ở dưới
 import { FaCheckCircle, FaArrowRight, FaHome } from 'react-icons/fa';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';

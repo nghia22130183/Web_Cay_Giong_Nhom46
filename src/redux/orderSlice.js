@@ -18,7 +18,6 @@ const orderSlice = createSlice({
                 date: new Date().toLocaleString('vi-VN'),
                 items: action.payload.items,
                 totalAmount: action.payload.totalAmount,
-                // Lưu thông tin khách hàng điền từ Form vào đây
                 customerInfo: action.payload.customerInfo,
                 status: 'Chờ xác nhận',
             };

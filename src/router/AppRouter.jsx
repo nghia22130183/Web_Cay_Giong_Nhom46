@@ -10,7 +10,7 @@ import SearchResults from '../pages/SearchResults/SearchResults';
 import Success from '../pages/Success/Success';
 import Profile from '../pages/Profile/Profile';
 import WishlistPage from '../pages/Wishlist/Wishlist';
-import EditProfile from '../pages/Profile/EditProfile'; // FIX: Thêm dấu .. để ra ngoài thư mục router
+import EditProfile from '../pages/Profile/EditProfile';
 import NotFound from '../pages/NotFound/NotFound';
 
 const AppRouter = () => {
@@ -28,7 +28,6 @@ const AppRouter = () => {
             <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/wishlist" element={<WishlistPage />} />
 
-            {/* Luôn để Route NotFound ở cuối cùng */}
             <Route path="*" element={<NotFound />} />
         </Routes>
     );
