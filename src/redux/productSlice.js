@@ -1,27 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchProducts = createAsyncThunk(
-    'products/fetchProducts',
-    async () => {
-        const response = await fetch('http://localhost:5000/products');
-        if (!response.ok) {
-            throw new Error('Không thể tải dữ liệu');
-        }
-        const data = await response.json();
-        return data;
-    }
-);
+import db from '../../server/db.json';
 
-// 2. Tạo Slice
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(db.products);
+        }, 800);
+    });
+});
+
 const productSlice = createSlice({
     name: 'products',
     initialState: {
         items: [],
         status: 'idle',
-        error: null,
+        error: null
     },
-    reducers: {
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchProducts.pending, (state) => {
@@ -35,7 +31,7 @@ const productSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message;
             });
-    },
+    }
 });
 
 export default productSlice.reducer;
