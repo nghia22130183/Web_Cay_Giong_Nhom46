@@ -18,3 +18,4 @@ If you are developing a production application, we recommend using TypeScript wi
 ## How to run
 npx json-server --watch server/db.json --port 5000
 npm run dev
+https://nghia22130183.github.io/Web_Cay_Giong_Nhom46/#/
